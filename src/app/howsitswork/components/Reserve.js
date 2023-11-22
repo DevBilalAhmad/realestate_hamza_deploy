@@ -6,7 +6,7 @@ const Reserve = () => {
         
         <div className='lg:w-[800px] lg:h-[400px] '>
         <div className='lg:flex lg:flex-row flex-col'> 
-        <img src='/w3.png' className='w-[100px] h-[100px] lg:mr-10 my-10'/>
+        <img src='/w3.png' className='w-[100px] h-[100px] lg:mr-10 mb-5'/>
         <div>
             <div className=''>
         <p className='text-[28px] justify-center font-bold' > 2. Reserve the property</p>

@@ -54,7 +54,7 @@ const Footer = () => {
                                 Agents
                             </p>
                             <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                                <Link className="hover:opacity-75" href=''> Publish your Property </Link>
+                                <Link className="hover:opacity-75" href='/Create_ad'> Publish your Property </Link>
                                 <Link className="hover:opacity-75" href=''> Help </Link>
                                 <Link className="hover:opacity-75" href='/Contact'> Contact Us </Link>
                                 
@@ -65,7 +65,7 @@ const Footer = () => {
                     <div>
                         <img src="/logo.png" className="mr-5 h-6 sm:h-9" alt="logo" />
                         <p className="max-w-xs mt-4 text-sm text-gray-600">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
+                        Roomflog connects tenants and listers through matchmaking and allows anyone to post, search, chat and rent securely.
                         </p>
                         <div className="flex mt-8 space-x-6 text-gray-600">
                             <a className="hover:opacity-75" href target="_blank" rel="noreferrer">

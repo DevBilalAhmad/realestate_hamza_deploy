@@ -7,12 +7,10 @@ const Page = () => {
         <img src='/C.png'className='h-[250px] w-full'/>
       </div>
       <div className='text-left lg:mx-96 items-center justify-center lg:px-64 my-10 mx-5'>
-        <h1 className='text-left text-2xl'> Website provider: </h1>
-        <p className='my-5'>Spotahome, S.L.U. Calle de Piamonte, 23, 28004, Madrid, Spain Contact: impressum@spotahome.com https://www.spotahome.com/contact-us</p>
-        <p className='mb-5'>CEO/Director: Pablo Alejandro Artacho Amichis. Commercially registered in Madrid Trade register number: B87004511 VAT number: ESB87004511</p>
-        <h1 className='text-xl'>Company for Marketing and Business Development services:</h1>
-        <p className='my-5'>SPOTAHOME GERMANY GmbH Friedrichstraße 171, 10117, Berlin, Germany Contact: impressum@spotahome.com https://www.spotahome.com/de/kontaktieren-sie-uns</p>
-        <p>CEO/Director: Pablo Alejandro Artacho Amichis Registered in Berlin Trade register number HRB 206798 B VAT number: DE326773159</p>
+        <h1 className='text-left text-2xl'> The Morning Hours Ltd. </h1>
+        <p className='my-5 font-bold'>Registered No:<span className='font-normal'> 12845564</span></p>
+        <p className='my-5 font-bold'>Registered office:<span className='font-normal'> 43 Rainsbrough close, London, United Kingdom, NW100TR</span></p>
+        <p className='my-5 font-bold'>Landline#:<span className='font-normal'> 020 8090 2752</span></p>
       </div>
     </div>
   )

@@ -12,8 +12,7 @@ const Properties = () => {
         <h1>Double Room</h1>
         <div className="flex flex-row">
                     <div className="flex-1 ">Shared apartment</div><span>|</span> 
-                    <div className="flex-1">4 bedrooms </div><span>|</span>
-                    <div className="flex-1">123 m<sup>2</sup></div>
+                    <div className="flex-1">4 bedrooms </div>
                 </div>
                 <div className="price">From <em>860 €</em> month</div>
                 <Link href="/Team"><button>View More</button></Link>
@@ -26,8 +25,7 @@ const Properties = () => {
         <h1>Double Room</h1>
         <div className="flex flex-row">
                     <div className="flex-1 ">Shared apartment</div><span>|</span> 
-                    <div className="flex-1 ">4 bedrooms </div><span>|</span>
-                    <div className="flex-1 ">123 m<sup>2</sup></div>
+                    <div className="flex-1 ">4 bedrooms </div>
                 </div>
                 <div className="price">From <em>860 €</em> month</div>
                 <Link href="/Team"><button>View More</button></Link>
@@ -37,8 +35,7 @@ const Properties = () => {
         <h1>Double Room</h1>
         <div className="flex flex-row ">
                     <div className="flex-1 ">Shared apartment</div><span>|</span> 
-                    <div className="flex-1 ">4 bedrooms </div><span>|</span>
-                    <div className="flex-1 ">123 m<sup>2</sup></div>
+                    <div className="flex-1 ">4 bedrooms </div>
                 </div>
                 <div className="price">From <em>860 €</em> month</div>
                 <Link href="/Team"><button>View More</button></Link>
@@ -48,15 +45,14 @@ const Properties = () => {
         <h1>Double Room</h1>
         <div className="flex flex-row ">
                     <div className="flex-1 ">Shared apartment</div><span>|</span> 
-                    <div className="flex-1 ">4 bedrooms </div><span>|</span>
-                    <div className="flex-1 ">123 m<sup>2</sup></div>
+                    <div className="flex-1 ">4 bedrooms </div>
                 </div>
                 <div className="price">From <em>860 €</em> month</div>
                 <Link href="/Team"><button>View More</button></Link>
       </div>
       </div>
       <div className='text-white relative pt-10 pb-[100px] text-center'>
-        <Link href="/Team">
+        <Link href="/Properties">
         <button class="bg-[#283618] hover:bg-[#d8dcbc] text-white font-light py-2 px-4 border border-[#283618] rounded">
         Show me more</button>
         </Link>

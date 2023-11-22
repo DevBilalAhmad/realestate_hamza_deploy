@@ -18,7 +18,7 @@ const Apartment = () => {
      
      <p className='my-5'>Rates from 2.340 €/month</p>
      <div className='text-white relative pt-5 pb-[100px]'>
-     <Link href="/">
+     <Link href="/Properties">
      <button class="bg-[#283618] hover:bg-[#d8dcbc] text-white font-light py-2 px-4 border border-[#283618] rounded">
      Search Apartment</button>
      </Link>
