@@ -5,15 +5,21 @@ import { useRouter } from 'next/navigation'
 import { collection, deleteDoc, addDoc, doc, getDocs } from 'firebase/firestore';
 import { database , storage} from '../../../firebase';
 import Link from 'next/link'
+import DatePicker from "react-datepicker";
+
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";// import Rent_type from './component/Rent_type'
+import { FaCalendar } from 'react-icons/fa6';
 // import Agent_type from './component/Agent_type'
 // import File_upload from './component/File_upload'
 // import Property_detail from './component/Property_detail'
 // import Link from 'next/link'
 
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
 
 const page = () => {
+  
   const [selectedValue, setSelectedValue] = useState('');
   const [selectedValue1, setSelectedValue1] = useState('');
   const [title, settitle] = useState('');
@@ -30,6 +36,72 @@ const page = () => {
     const [imageFile, setImageFile] = useState(null);
 const [imageUrl, setImageUrl] = useState('');
  const router = useRouter();
+ const [imageFiles, setImageFiles] = useState([]);
+ const [imageUrls, setImageUrls] = useState([]);
+
+
+
+
+
+
+
+
+ const [showCalendar, setShowCalendar] = useState(false);
+ const [selectedDate, setSelectedDate] = useState(null);
+
+ const toggleCalendar = () => {
+   setShowCalendar(!showCalendar);
+ };
+
+ const onChange = (dates) => {
+   // The 'dates' parameter is an array containing the start and end dates when using selectsRange
+   // In this example, we're assuming the user is selecting a single date, so we take the first element
+   const selected = dates[0];
+
+   setSelectedDate(selected);
+
+   // Log the selected date to the console
+   console.log('Selected Date:', selected);
+     // Format the date using date-fns before logging
+     const formattedDate = format(selected, 'dd/MM/yyyy', { awareOfUnicodeTokens: true });
+     console.log('Selected Date:', formattedDate);
+     setShowCalendar(false);
+ };
+//------------
+
+ const handleFileChange = (e) => {
+  const files = e.target.files;
+  const newImageFiles = [...imageFiles];
+  const newImageUrls = [...imageUrls];
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    newImageFiles.push(file);
+
+    // You can also display the images as they are selected
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      newImageUrls.push(e.target.result);
+      setImageUrls(newImageUrls);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  setImageFiles(newImageFiles);
+};
+
+const handleRemoveImage = (index) => {
+  const newImageFiles = [...imageFiles];
+  const newImageUrls = [...imageUrls];
+
+  newImageFiles.splice(index, 1);
+  newImageUrls.splice(index, 1);
+
+  setImageFiles(newImageFiles);
+  setImageUrls(newImageUrls);
+};
+
+
  
 //   const handleChange = (event) => {
 //     setSelectedValue(event.target.value);
@@ -54,11 +126,14 @@ const [imageUrl, setImageUrl] = useState('');
   
    e.preventDefault();
      
-       if (imageFile) {
-         const storageRef = ref(storage, `adsImages/${imageFile.name}`);
-         await uploadBytesResumable(storageRef, imageFile).then(async () => {
-           const imageUrl = await getDownloadURL(storageRef);
-           await addDoc(collection(database, 'ads'), {
+   if (imageFiles.length > 0) {
+    // Loop through each image file
+    for (let i = 0; i < imageFiles.length; i++) {
+      const storageRef = ref(storage, `adsImages/${imageFiles[i].name}`);
+      await uploadBytesResumable(storageRef, imageFiles[i]).then(async () => {
+        const imageUrl = await getDownloadURL(storageRef);
+        // Save each image URL along with other data
+                   await addDoc(collection(database, 'ads'), {
              rentind: selectedValue,
              acting: selectedValue1,
              imageUrl: imageUrl,
@@ -82,12 +157,14 @@ const [imageUrl, setImageUrl] = useState('');
              // setMarks('');
              setImageFile(null);
              setImageUrl('');
+             setImageFiles([]);
+             setImageUrls([]);
            })
            .catch((err) => {
              console.log(err);
            });
          });
-       }
+       }}
     
     
  };
@@ -126,18 +203,26 @@ const [imageUrl, setImageUrl] = useState('');
     <div>
     <h2 className='font-bold my-7'>Photo</h2>
 <div className="flex items-center justify-center w-full">
-    <label  htmlFor="file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-            </svg>
-            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-        </div>
-        <input required style={{ display: "none" }} type="file" id="file"  onChange={(e) => {
-                const file = e.target.files[0];
-                setImageFile(file);}} class="hidden" />
-    </label>
+<label htmlFor="file">
+Upload Images:
+<input
+  required
+  style={{ display: 'none' }}
+  type="file"
+  id="file"
+  onChange={handleFileChange}
+  className="hidden"
+  multiple  // Allow selecting multiple files
+/>
+</label>
+    {imageUrls.map((url, index) => (
+      <div key={index}>
+        <img src={url} alt={`Image ${index}`} style={{ width: '100px', height: 'auto' }} />
+        <button type="button" onClick={() => handleRemoveImage(index)}>
+          Remove
+        </button>
+      </div>
+    ))}
 </div>
 <div className='h-[1px] bg-neutral-700 my-7'></div> 
 </div>
@@ -168,11 +253,34 @@ const [imageUrl, setImageUrl] = useState('');
         <div>
         
         <h2 className='my-5 font-bold'>Date available:<sup>*</sup></h2>
+        <div className="">
+        <img
+          src="/about.jpg"
+          alt="schedule-icon"
+          className=" w-[17px] cursor-pointer animate__transition"
+          onClick={toggleCalendar}
+        />
+
+        {showCalendar === true ? (
+          <div
+          >
+            <DatePicker
+              // selected={timeData.date}
+               selected={selectedDate}
+              onChange={onChange}
+              selectsRange
+              inline
+              maxDate={new Date(2026, 11, 31)} // December 31, 2026
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     <div className="relative max-w-sm ">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-        </svg>
+      
       </div>
       <input datepicker type="text"   onChange={(e) => setdate(e.target.value)} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"/>
     </div>

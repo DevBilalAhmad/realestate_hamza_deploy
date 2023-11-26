@@ -15,4 +15,14 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const database = getFirestore();
  const storage = getStorage();
  const auth = getAuth(app);
-export {app, database,storage,auth}
+ const firestore = getFirestore(app);
+export {app, database,storage,auth,firestore}
+
+
+
+
+export const onAuthStateChanged = (onChange) => {
+    return auth.onAuthStateChanged((user) => {
+      onChange(user);
+    });
+  };

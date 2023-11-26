@@ -50,7 +50,7 @@ const Login = () => {
     
   return (
     <div class=" h-screen bg-gray-50 pt-5">
-      <p className='text-center text-5xl font-bold mb-4'>Login </p>
+      <p className='mb-4 text-5xl font-bold text-center'>Login </p>
     <div class="flex bg-slate-300  rounded-lg shadow-lg overflow-hidden mx-auto my-auto max-w-sm lg:max-w-4xl">
           <div class="hidden lg:block lg:w-1/2 bg-cover" style={{"background-image":"url('https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80"}}></div>
           <div class="w-full p-8 lg:w-1/2">

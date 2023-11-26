@@ -12,53 +12,49 @@ import Hero from './component/Hero'
 
 const page = () => {
 
-  const router = useRouter();
+  // const router = useRouter();
   
-  const [studentsData, setStudentsData] = useState([]);
+  // const [studentsData, setStudentsData] = useState([]);
 
-  useEffect(() => {
-    if(!sessionStorage.getItem("username")){
-      router.push("/Login")
-      // setUsername(sessionStorage.getItem("username"))
-    }
+  // useEffect(() => {
     
-  }, [])
+  // }, [])
   
 
-  useEffect(() => {
-    getData();
-  }, [])
+  // useEffect(() => {
+  //   getData();
+  // }, [])
   
 
-  const getData = async () => {
-    await getDocs(collection(database, 'students'))
-    .then((response) => {
-      setStudentsData(response.docs);
-    })
-  }
+  // const getData = async () => {
+  //   await getDocs(collection(database, 'students'))
+  //   .then((response) => {
+  //     setStudentsData(response.docs);
+  //   })
+  // }
 
-  console.log(studentsData);
+  // console.log(studentsData);
 
-  const updateStudent = () => {
-    alert('update');
-  }
+  // const updateStudent = () => {
+  //   alert('update');
+  // }
 
-  const deleteStudent = async (id) => {
-    let fieldToDelete = doc(database, 'students', id);
-    await deleteDoc(fieldToDelete)
-    .then(() => {
-      alert('Data Deleted')
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+  // const deleteStudent = async (id) => {
+  //   let fieldToDelete = doc(database, 'students', id);
+  //   await deleteDoc(fieldToDelete)
+  //   .then(() => {
+  //     alert('Data Deleted')
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
 
-  }
+  // }
   
-  const logout = () => {
-    sessionStorage.removeItem('username');
-    router.push('/Login')
-  }
+  // const logout = () => {
+  //   sessionStorage.removeItem('username');
+  //   router.push('/Login')
+  // }
   return (
     <div>
     {/* <Navbar/> */}
